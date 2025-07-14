@@ -1,9 +1,3 @@
-Absolut! Eine gute `README.md` ist das Aushängeschild deines GitHub-Projekts. Sie erklärt, was das Projekt tut, warum es nützlich ist und wie man es benutzt.
-
-Hier ist ein Entwurf für eine umfassende und benutzerfreundliche `README.md` in Deutsch, die du direkt in dein Projekt übernehmen kannst. Sie ist in Markdown formatiert, was auf GitHub automatisch schön dargestellt wird.
-
----
-
 ````markdown
 # Kivitendo Easy Installer 🚀
 
