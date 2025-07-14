@@ -1,37 +1,17 @@
 #!/bin/bash
-source "$(dirname "$0")/lib/common.sh"
 
 # Das Skript bei einem Fehler sofort beenden
 set -e
 
 # --- Konfiguration ---
-# Verzeichnis, in dem die Skripte liegen
 SCRIPTS_DIR="$(dirname "$0")/scripts"
 CONFIG_FILE="$(dirname "$0")/kivitendo.conf"
 
-# --- Farben und Symbole (werden an Sub-Skripte vererbt) ---
-export COLOR_GREEN='\033[0;32m'
-export COLOR_YELLOW='\033[1;33m'
-export COLOR_RED='\033[0;31m'
-export COLOR_BLUE='\033[0;34m'
-export COLOR_RESET='\033[0m'
-
-export ICON_OK="✅"
-export ICON_WARN="⚠️"
-export ICON_ERROR="❌"
-export ICON_INFO="ℹ️"
-export ICON_ROCKET="🚀"
-
-# --- Hilfsfunktion für die Ausgabe ---
-print_message() {
-    local color=$1
-    local icon=$2
-    local message=$3
-    echo -e "${color}${icon} ${message}${COLOR_RESET}"
-}
+# Lade die gemeinsame Bibliothek für Farben und Funktionen
+# Stelle sicher, dass diese Zeile in allen Skripten vorhanden ist
+source "${SCRIPTS_DIR}/lib/common.sh"
 
 # --- Root-Check ---
-# Überprüfen, ob das Skript mit Root-Rechten (sudo) läuft
 if [ "$EUID" -ne 0 ]; then
   print_message "${COLOR_RED}" "${ICON_ERROR}" "Bitte führe das Skript mit sudo oder als root aus: sudo ./install.sh"
   exit 1
@@ -53,21 +33,24 @@ main() {
     bash "${SCRIPTS_DIR}/02_install_postgres.sh"
     echo
 
-    # Schritt 3: Apache2 installieren (Platzhalter)
+    # Schritt 3: Apache2 installieren
     print_message "${COLOR_BLUE}" "--- (3/4) Apache2 Webserver wird installiert und konfiguriert ---"
-    # bash "${SCRIPTS_DIR}/03_install_apache.sh"
+    # KORREKTUR: Die folgende Zeile war auskommentiert
+    bash "${SCRIPTS_DIR}/03_install_apache.sh"
     echo
 
-    # Schritt 4: Kivitendo installieren (Platzhalter)
+    # Schritt 4: Kivitendo installieren
     print_message "${COLOR_BLUE}" "--- (4/4) Kivitendo wird installiert und konfiguriert ---"
-    # bash "${SCRIPTS_DIR}/04_install_kivitendo.sh"
+    # KORREKTUR: Die folgende Zeile war auskommentiert
+    bash "${SCRIPTS_DIR}/04_install_kivitendo.sh"
     echo
 
-    print_message "${COLOR_GREEN}" "${ICON_OK}" "Kivitendo Installation erfolgreich abgeschlossen!"
-    # Hier kommen später finale Anweisungen, z.B. die URL zum Aufrufen
+    print_message "${COLOR_GREEN}" "🎉 🎉 🎉  Installation erfolgreich abgeschlossen! 🎉 🎉 🎉"
+    echo
 
     # Finale Zusammenfassung aus der Konfig-Datei lesen
     if [ -f "$CONFIG_FILE" ]; then
+        # Lade die Variablen aus der Konfig-Datei
         source "$CONFIG_FILE"
         print_message "${COLOR_YELLOW}" "${ICON_INFO}" "Hier ist deine Zusammenfassung für das Kivitendo-Setup:"
         echo "------------------------------------------------------------------"
@@ -85,7 +68,6 @@ main() {
         echo -e "  Datenbank:            ${COLOR_GREEN}${DB_NAME}${COLOR_RESET}"
         echo "------------------------------------------------------------------"
     fi
-
 }
 
 # Skript ausführen
