@@ -6,7 +6,7 @@ Das Ziel ist es, den gesamten Prozess – von der Systemvorbereitung bis zur lau
 
 ## ✨ Features
 
-*   ** vollautomatische Installation:** Führt alle notwendigen Schritte ohne manuelle Eingriffe durch.
+   ** vollautomatische Installation:** Führt alle notwendigen Schritte ohne manuelle Eingriffe durch.
 *   ** interaktiv & benutzerfreundlich:** Fragt nach notwendigen Informationen (z.B. Passwort, Domain) und gibt verständliche, farbige Statusmeldungen aus.
 *   ** flexible Versionsauswahl:** Lässt dich die zu installierende Kivitendo-Version dynamisch von GitHub auswählen.
 *   ** sicherheitsbewusst:** Verwendet sichere, zufällige Passwörter als Standard, konfiguriert die Datenbank-Authentifizierung korrekt und vermeidet unsichere Voreinstellungen.
