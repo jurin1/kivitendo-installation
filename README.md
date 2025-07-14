@@ -6,13 +6,13 @@ Das Ziel ist es, den gesamten Prozess – von der Systemvorbereitung bis zur lau
 
 ## ✨ Features
 
-   ** vollautomatische Installation:** Führt alle notwendigen Schritte ohne manuelle Eingriffe durch.
-*   ** interaktiv & benutzerfreundlich:** Fragt nach notwendigen Informationen (z.B. Passwort, Domain) und gibt verständliche, farbige Statusmeldungen aus.
-*   ** flexible Versionsauswahl:** Lässt dich die zu installierende Kivitendo-Version dynamisch von GitHub auswählen.
-*   ** sicherheitsbewusst:** Verwendet sichere, zufällige Passwörter als Standard, konfiguriert die Datenbank-Authentifizierung korrekt und vermeidet unsichere Voreinstellungen.
-*   ** modular & wartbar:** Der Installationsprozess ist in logische Einzelschritte und Skripte unterteilt, was die Anpassung und Wartung erleichtert.
-*   ** idempotent (Robust):** Die Skripte können meist mehrmals ausgeführt werden, ohne Fehler zu verursachen (z.B. wird ein bereits existierender DB-Benutzer nicht neu angelegt).
-*   ** finale Zusammenfassung:** Am Ende der Installation erhältst du eine übersichtliche Zusammenfassung aller wichtigen Zugangsdaten und URLs.
+*   **vollautomatische Installation:** Führt alle notwendigen Schritte ohne manuelle Eingriffe durch.
+*   **interaktiv & benutzerfreundlich:** Fragt nach notwendigen Informationen (z.B. Passwort, Domain) und gibt verständliche, farbige Statusmeldungen aus.
+*   **flexible Versionsauswahl:** Lässt dich die zu installierende Kivitendo-Version dynamisch von GitHub auswählen.
+*   **sicherheitsbewusst:** Verwendet sichere, zufällige Passwörter als Standard, konfiguriert die Datenbank-Authentifizierung korrekt und vermeidet unsichere Voreinstellungen.
+*   **modular & wartbar:** Der Installationsprozess ist in logische Einzelschritte und Skripte unterteilt, was die Anpassung und Wartung erleichtert.
+*   **idempotent (Robust):** Die Skripte können meist mehrmals ausgeführt werden, ohne Fehler zu verursachen (z.B. wird ein bereits existierender DB-Benutzer nicht neu angelegt).
+*   **finale Zusammenfassung:** Am Ende der Installation erhältst du eine übersichtliche Zusammenfassung aller wichtigen Zugangsdaten und URLs.
 
 ## ⚙️ Systemanforderungen
 
