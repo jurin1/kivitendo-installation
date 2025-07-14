@@ -1,5 +1,6 @@
 git
 jq
+curl
 apache2
 libarchive-zip-perl
 libclone-perl
@@ -61,3 +62,4 @@ libipc-run-perl
 libencode-imaputf7-perl
 libmail-imapclient-perl
 libuuid-tiny-perl
+
