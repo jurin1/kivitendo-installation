@@ -28,13 +28,12 @@ Führe die folgenden vier Befehle auf deinem Server aus. Der gesamte Prozess wir
 
 **1. Repository klonen:**
 ```bash
-git clone https://github.com/DEIN-BENUTZERNAME/kivitendo-installer.git
+git clone https://github.com/jurin1/kivitendo-installation.git
 ```
-*(Ersetze `DEIN-BENUTZERNAME` durch deinen tatsächlichen GitHub-Benutzernamen)*
 
 **2. In das Verzeichnis wechseln:**
 ```bash
-cd kivitendo-installer
+cd kivitendo-installation
 ```
 
 **3. Das Skript ausführbar machen:**

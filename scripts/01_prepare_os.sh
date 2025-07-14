@@ -1,18 +1,17 @@
 #!/bin/bash
-source "$(dirname "$0")/lib/common.sh"
 
-# Funktion zur formatierten Ausgabe
-print_message() {
-    local color=$1
-    local icon=$2
-    local message=$3
-    echo -e "${color}${icon} ${message}${COLOR_RESET}"
-}
+# Das Skript bei einem Fehler sofort beenden
+set -e
+
+# Lade die gemeinsame Bibliothek für Farben und Funktionen
+# Diese Zeile sollte hinzugefügt werden, falls noch nicht geschehen (siehe unsere letzte Diskussion)
+source "$(dirname "$0")/lib/common.sh"
 
 # --- Skript-Start ---
 print_message "${COLOR_BLUE}" "${ICON_INFO}" "Starte Vorbereitung des Betriebssystems..."
 
 # 1. Überprüfung des Betriebssystems
+# ... (Dieser Teil bleibt unverändert) ...
 print_message "${COLOR_BLUE}" "${ICON_INFO}" "Prüfe Betriebssystem-Kompatibilität..."
 
 if [ -f /etc/os-release ]; then
@@ -41,7 +40,9 @@ else
     exit 1
 fi
 
+
 # 2. System-Updates
+# ... (Dieser Teil bleibt unverändert) ...
 print_message "${COLOR_BLUE}" "${ICON_INFO}" "Aktualisiere das System. Dies kann einige Minuten dauern..."
 if sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y; then
     print_message "${COLOR_GREEN}" "${ICON_OK}" "System erfolgreich aktualisiert."
@@ -50,7 +51,8 @@ else
     exit 1
 fi
 
-# 3. Zeitzone und Locales konfigurieren
+
+# 3. Zeitzone und Locales konfigurieren (NEUER, ROBUSTERER TEIL)
 print_message "${COLOR_BLUE}" "${ICON_INFO}" "Konfiguriere Zeitzone und Locales..."
 
 # Setze Zeitzone auf Europe/Berlin
@@ -61,30 +63,42 @@ else
     exit 1
 fi
 
-# Installiere Locales-Paket, falls nicht vorhanden
-if ! dpkg -l | grep -q locales; then
-    sudo apt-get install -y locales
+# Installiere die notwendigen Locale-Pakete (locales-all ist der Schlüssel)
+print_message "${COLOR_BLUE}" "${ICON_INFO}" "Installiere und konfiguriere Locale-Pakete..."
+if sudo apt-get install -y locales locales-all &> /dev/null; then
+    print_message "${COLOR_GREEN}" "${ICON_OK}" "Locale-Pakete sind installiert."
+else
+    print_message "${COLOR_RED}" "${ICON_ERROR}" "Fehler bei der Installation der Locale-Pakete."
+    exit 1
 fi
 
-# Konfiguriere de_DE.UTF-8
-if ! grep -q "de_DE.UTF-8 UTF-8" /etc/locale.gen; then
-    echo "de_DE.UTF-8 UTF-8" | sudo tee -a /etc/locale.gen
+# Stelle sicher, dass de_DE.UTF-8 in /etc/locale.gen aktiv ist
+LOCALE_LINE="de_DE.UTF-8 UTF-8"
+# Entkommentiere die Zeile, falls sie mit '#' beginnt
+sudo sed -i "s/^# *${LOCALE_LINE}/${LOCALE_LINE}/" /etc/locale.gen
+# Füge die Zeile hinzu, falls sie gar nicht existiert
+if ! grep -q "^${LOCALE_LINE}" /etc/locale.gen; then
+    echo "${LOCALE_LINE}" | sudo tee -a /etc/locale.gen > /dev/null
 fi
+print_message "${COLOR_GREEN}" "${ICON_OK}" "Locale 'de_DE.UTF-8' in /etc/locale.gen sichergestellt."
 
-if sudo locale-gen de_DE.UTF-8; then
-    print_message "${COLOR_GREEN}" "${ICON_OK}" "Locale 'de_DE.UTF-8' erfolgreich generiert."
+# Generiere die Locales
+if sudo locale-gen; then
+    print_message "${COLOR_GREEN}" "${ICON_OK}" "System-Locales erfolgreich neu generiert."
 else
     print_message "${COLOR_RED}" "${ICON_ERROR}" "Fehler beim Generieren der Locales."
     exit 1
 fi
 
+# Setze die System-Locale (sollte jetzt funktionieren)
 if sudo update-locale LANG=de_DE.UTF-8; then
     print_message "${COLOR_GREEN}" "${ICON_OK}" "System-Locale auf 'de_DE.UTF-8' gesetzt."
 else
-    print_message "${COLOR_RED}" "${ICON_ERROR}" "Fehler beim Setzen der System-Locale."
+    print_message "${COLOR_RED}" "${ICON_ERROR}" "FEHLER: Konnte die System-Locale trotz Korrekturmaßnahmen nicht setzen."
     exit 1
 fi
 
+# Exportiere die Variablen für die aktuelle Shell-Sitzung
 export LANG=de_DE.UTF-8
 export LC_ALL=de_DE.UTF-8
 
