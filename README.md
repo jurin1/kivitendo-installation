@@ -1,4 +1,4 @@
-````markdown
+````
 # Kivitendo Easy Installer 🚀
 
 Dieses Projekt stellt ein automatisiertes Installations-Skript bereit, um die Open-Source-ERP-Software [Kivitendo](https://kivitendo.de/) schnell und unkompliziert auf einem Debian- oder Ubuntu-System zu installieren. Das Skript ist primär für den Einsatz in einem Proxmox LXC-Container optimiert, funktioniert aber auch auf jeder anderen frischen Server- oder VM-Installation.
