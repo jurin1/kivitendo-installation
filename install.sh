@@ -56,6 +56,7 @@ main() {
         echo "------------------------------------------------------------------"
         echo -e "  Web-Adresse:        ${COLOR_GREEN}http://${KIVI_SERVER_NAME}${COLOR_RESET}"
         echo -e "  (Trage '${KIVI_SERVER_NAME}' in deiner lokalen hosts-Datei oder DNS ein)"
+        echo -e "  Admin-Webuser:      ${COLOR_GREEN}${DB_PASSWORD}${COLOR_RESET}"
         echo
         echo "  --- Datenbank-Admin (für die Ersteinrichtung) ---"
         echo -e "  Host:                 ${COLOR_GREEN}localhost${COLOR_RESET}"
